@@ -81,9 +81,11 @@
             if(elemName.parentElement.tagName == "menu") {
               elemName.setAttribute("role", "menuitem");
             }
+            else {
+              elemName.setAttribute("role", "link");
+            }
           break;
 
-          case "A":
           case "AREA":
           elemName.setAttribute("role", "link");
           break;
