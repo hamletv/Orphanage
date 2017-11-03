@@ -1,27 +1,3 @@
-/*'The Orphanage'
-'Project scope: conceptually, we want to highlight elements on a HTML document that do not contain ARIA roles.'
-'Create a JS script that injects this CSS into a document to update the DOM. Role attribute and value needs to be added.'
-
-Create script that:
-1. runs through and reads all elements in DOM
-2. checks to see if each element has [role] attributes
-3. element(s) without [role] attributes highlighted.
-4. element(s) with [role] attributes not highlighted.
-5. element(s) without [role] attr later injected with [role] attr.
-6. remove highlighting from element once [role] attr injected.
-
-Purpose of [role] attr: identify exact function of an element and its children, allows for accessibility of screen reader users, also useful for
-screen scrapers. Native semantic element; assigns purpose to element it is within. Browsers will apply first recognized role in list.
-Custom roles can be used as long as they don't conflict with any defined ARIA roles but will not be functional.
-
-WAI-ARIA roles: element types that must not be changed over time or with user actions. Assistive technologies unable to detect role value change. In order to
-reflect content in the DOM, user agents should map the role attr to appropriate value.
-*/
-
-//function to pick specific element. need function that houses this function and array of elements that
-//don't require aria roles. for loop will go through array and push [i] into getElem to remove each element.
-
-
 //START SCRIPT
 
 (function() {  //function takes current doc as parameter. IIFE will run script as soon as page loads.
