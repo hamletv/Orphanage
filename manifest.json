@@ -1,19 +1,18 @@
 {
 
+  "description": "Web accessibility developer tool highlights DOM elements with (green)
+  and without (red) ARIA roles; can simulteneously highlight all elments, adds text overlay
+  with role value to elements missing role attribute",
   "manifest_version": 2,
   "name": "X-Ray Goggles",
   "version": "1.0",
-
-  "description": "Highilight elements without ARIA roles; highlight elements
-with ARIA roles; highlight both, add text overlay with ARIA role value",
-
   "icons": {
     "48": "icons/border-48.png"
   },
 
   "content_scripts": [
     {
-      "matches": ["*://*/*"],
+      "matches": ["*://*.*/*"],
       "js": ["orphanage.js"]
     }
   ]

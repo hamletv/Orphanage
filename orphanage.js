@@ -1,4 +1,6 @@
 //START SCRIPT
+document.body.style.border = "5px solid blue";
+
 "use strict"
 
 //check current tab is active. activeTab var set to default true, may work better.
@@ -70,3 +72,243 @@ var cleanDOMArray = cleanElemArray(elemArray, noRoleElements);
     cleanDOMArray[i].hasAttribute("role") ? cleanDOMArray[i].style.cssText = "background-color: rgba(18,246,18,1)" : cleanDOMArray[i].style.cssText = "background-color: rgba(250,10,50,0.4)";
     }
   }
+
+
+  // NEED TO ADJUST BELOW FUNCTION TO ADD ROLE VALUE TO TEXT OVERLAY hiliteBoth FUNCTION.
+  //call hiliteElems function, returned array stored in var.
+  var litElems = hiliteElems(cleanDOMArray);
+
+  //function that loops through highlighted (litElems), removes highlight, adds role attribute and value.
+  function setRole(litElems) {
+
+      for (var x = 0; x < litElems.length; x++) {
+        var elemName = litElems[x];
+        elemName.style.cssText = null;
+        var checkTagName = litElems[x].tagName;  //must assign role and respective value based on element tagName.
+
+        switch (checkTagName) {
+
+          case "A":
+            if(elemName.parentElement.tagName == "menu") {
+              elemName.setAttribute("role", "menuitem");
+            }
+            else {
+              elemName.setAttribute("role", "link");
+            }
+          break;
+
+          case "AREA":
+          elemName.setAttribute("role", "link");
+          break;
+
+          case "ARTICLE":
+          elemName.setAttribute("role", "article");
+          break;
+
+          case "ASIDE":
+          elemName.setAttribute("role", "complimentary");
+          break;
+
+          case "BODY":
+          elemName.setAttribute("role", "document");
+          break;
+
+          case "BUTTON":
+          elemName.setAttribute("role", "button");
+          break;
+
+          case "DATALIST":
+          elemName.setAttribute("role", "listbox");
+          break;
+
+          case "DD":
+          elemName.setAttribute("role", "definition");
+          break;
+
+          case "DIALOG":
+          elemName.setAttribute("role", "dialog");
+          break;
+
+          case "FOOTER":
+          elemName.setAttribute("role", "contentinfo");
+          break;
+
+          case "FORM":
+          elemName.setAttribute("role", "form");
+          break;
+
+          case "H1":
+          case "H2":
+          case "H3":
+          case "H4":
+          case "H5":
+          case "H6":
+          elemName.setAttribute("role", "heading");
+          break;
+
+          case "HEADER":
+          elemName.setAttribute("role", "banner");
+          break;
+
+          case "HR":
+          elemName.setAttribute("role", "separator");
+          break;
+
+          case "IMG":
+            if(elemName.alt == "" || elemName.alt == null) {
+              elemName.setAttribute("role", "presentation");
+            }
+            else {
+              elemName.setAttribute("role", "img");
+            }
+          break;
+
+          case "INPUT":  //<input> element with most applicable roles. nested switch case not ideal but better than multiple if/else if statements.
+            switch(true) {  //some roles require checking <input> parent element tagName
+
+              case elemName.type == "button" || elemName.type == "image" || elemName.type == "reset" || elemName.type == "submit":
+              elemName.setAttribute("role", "button");
+
+              case elemName.type == "button" || elemName.type == "image" && elemName.parentElement.tagName == "menu":
+              elemName.setAttribute("role", "menuitem");
+
+              case elemName.type == "checkbox":
+              elemName.setAttribute("role", "checkbox");
+
+              case elemName.type == "email" && elemName.parentElement.tagName == "menu":
+              elemName.setAttribute("role", "menuitemcheckbox");
+
+              case elemName.type == "button" || elemName.type == "email" || elemName.type == "telephone" || elemName.type == "text" || elemName.type == "url":
+              elemName.setAttribute("role", "textbox");
+
+              case elemName.type == "number":
+              elemName.setAttribute("role", "spinbutton");
+
+              case elemName.type == "radio":
+              elemName.setAttribute("role", "radio");
+
+              case elemName.type == "radio" && elemName.parentElement.tagName == "menu":
+              elemName.setAttribute("role", "menuitemradio");
+
+              case elemName.type == "range":
+              elemName.setAttribute("role", "slider");
+
+              case elemName.type == "search":
+              elemName.setAttribute("role", "searchbox");
+            }
+          break;
+
+          case "KEYGEN":
+          elemName.setAttribute("role", "listbox");
+          break;
+
+          case "LI":
+          elemName.setAttribute("role", "listitem");
+          break;
+
+          case "MAIN":
+          elemName.setAttribute("role", "main");
+          break;
+
+          case "MATH":
+          elemName.setAttribute("role", "math");
+          break;
+
+          case "MENU":
+          elemName.setAttribute("role", "menu");
+          break;
+
+          case "MENUITEM":
+            if(elemName.type == "command") {
+              elemName.setAttribute("role", "menuitem");
+            }
+            else if (elemName.type == "checkbox") {
+              elemName.setAttribute("role", "menuitemcheckbox");
+            }
+            else if (elemName.type == "radio") {
+              elemName.setAttribute("role", "menuitemradio");
+            }
+            else {
+              elemName.setAttribute("role", "menuitem");
+            }
+          break;
+
+          case "NAV":
+          elemName.setAttribute("role", "navigation");
+          break;
+
+          case "OL":
+          case "UL":
+          elemName.setAttribute("role", "list");
+          break;
+
+          case "OPTGROUP":
+          elemName.setAttribute("role", "group");
+          break;
+
+          case "OPTION":
+          elemName.setAttribute("role", "option");
+          break;
+
+          case "OUTPUT":
+          elemName.setAttribute("role", "status");
+          break;
+
+          case "PROGRESS":
+          elemName.setAttribute("role", "progressbar");
+          break;
+
+          case "SECTION":
+          elemName.setAttribute("role", "region");
+          break;
+
+          case "SELECT":
+            if(elemName.size > 1) {
+              elemName.setAttribute("role", "listbox");
+            }
+            else {
+              elemName.setAttribute("role", "combobox");
+            }
+          break;
+
+          case "TABLE":
+          elemName.setAttribute("role", "table");
+          break;
+
+          case "TBODY":
+          case "TFOOT":
+          elemName.setAttribute("role", "rowgroup");
+          break;
+
+          case "TD":
+            if(elemName.parentElement.hasAttribute("role") == "table") {  //checks <td> element parent role attribute.
+              elemName.setAttribute("role", "cell");
+            }
+            else {
+              elemName.setAttribute("role", "gridcell");
+            }
+          break;
+
+          case "TEXTAREA":
+          elemName.setAttribute("role", "textbox");
+          break;
+
+          case "TH":
+            if(elemName.hasAttribute("role") != "columnheader" || elemName.hasAttribute("role") != "rowheader" && elemName.parentElement.hasAttribute("role") == "table") {
+              elemName.setAttribute("role", "cell");
+            }
+            else {
+              elemName.setAttribute("role", "columnheader");
+            }
+          break;
+
+          case "TR":
+          elemName.setAttribute("role", "row");
+          break;
+
+          default: "All elements checked."
+
+        }
+      }
+      return litElems;  //highlight off, return elements with role attributes
+    }
