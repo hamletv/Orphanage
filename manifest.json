@@ -1,0 +1,21 @@
+{
+
+  "manifest_version": 2,
+  "name": "X-Ray Goggles",
+  "version": "1.0",
+
+  "description": "Highilight elements without ARIA roles; highlight elements
+with ARIA roles; highlight both, add text overlay with ARIA role value",
+
+  "icons": {
+    "48": "icons/border-48.png"
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["*://*/*"],
+      "js": ["orphanage.js"]
+    }
+  ]
+
+}
