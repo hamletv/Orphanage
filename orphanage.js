@@ -1,5 +1,5 @@
 //START SCRIPT
-document.body.style.border = "5px solid blue";
+//document.body.style.border = "5px solid blue";
 
 "use strict"
 
@@ -49,8 +49,19 @@ var cleanDOMArray = cleanElemArray(elemArray, noRoleElements);
   //remove function effect/call on button click.
   function hilitePink(cleanDOMArray){
     for(var i = 0; i < cleanDOMArray.length; i++){
-    cleanDOMArray[i].hasAttribute("role") ? cleanDOMArray[i].style.cssText = "" : cleanDOMArray[i].style.cssText = "background-color: rgba(250,10,50,0.4)";
+      var pinkNoRoleElement = cleanDOMArray[i];
+      if(pinkNoRoleElement.hasAttribute("role")){
+        pinkNoRoleElement.style.cssText = null;
+      }
+      pinkNoRoleElement.style.cssText = "background-color: rgba(250,10,50,0.4)";
+      pinkNoRoleElement.className += " pink_popup pink_popup_text pink_popup_text::after pink_popup_show";
     }
+    return pinkNoRoleElement;
+  }
+
+  //popup function, open popup on click
+  function popupFunction(){
+    var pinkpopup =
   }
 
 
@@ -65,18 +76,19 @@ var cleanDOMArray = cleanElemArray(elemArray, noRoleElements);
 
 
   //highlight both elements with and without role attribute.function called on button click.
+  //cleanDOMArray[i].style.display = cleanDOMArray[i].getAttribute("role"); -- display role attr. value
   //remove function effect/call on button click.
   function hiliteBoth(cleanDOMArray) {
     for(var i = 0; i < cleanDOMArray.length; i++){
-    //cleanDOMArray[i].style.display = cleanDOMArray[i].getAttribute("role"); -- display role attr. value
-    cleanDOMArray[i].hasAttribute("role") ? cleanDOMArray[i].style.cssText = "background-color: rgba(18,246,18,1)" : cleanDOMArray[i].style.cssText = "background-color: rgba(250,10,50,0.4)";
+      var cleanDOMElement = cleanDOMArray[i];
+    if(cleanDOMElement.hasAttribute("role")) {
+      cleanDOMElement.style.cssText = "background-color: rgba(18,246,18,1)";
+    }
+    else {
+      cleanDOMElement.style.cssText = "background-color: rgba(250,10,50,0.4)";
     }
   }
 
-
-  // NEED TO ADJUST BELOW FUNCTION TO ADD ROLE VALUE TO TEXT OVERLAY hiliteBoth FUNCTION.
-  //call hiliteElems function, returned array stored in var.
-  var litElems = hiliteElems(cleanDOMArray);
 
   //function that loops through highlighted (litElems), removes highlight, adds role attribute and value.
   function setRole(litElems) {

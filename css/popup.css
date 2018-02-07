@@ -1,0 +1,54 @@
+/* popup will be small simple box that show role attribute value
+that should be assigned to current element */
+
+/* popup container */
+.pink_popup {
+position: relative;
+display: inline-block;
+cursor: pointer;
+}
+
+/* pink_popup text */
+.pink_popup .pink_popup_text {
+  visibility: hidden;
+  width: 160px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 8px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -80px;
+}
+
+.pink_popup .pink_popup_text::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+/* toggle class when pink_popup container clicked; hide/show */
+.pink_popup .pink_popup_show {
+  visibility: visible;
+  -webkit-animation: fadeIn 1s;
+  animation: fadeIn 1s;
+}
+
+/* add animation, fade in the popup */
+@-webkit-keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+@@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
